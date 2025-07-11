@@ -1,18 +1,14 @@
-name: My First Workflow
-on: push
+name: CI Pipeline
+
+
+on:
+  push:
+    branches: [ main ]
+
 
 jobs:
-  first_job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        
-      - name: Welcome message
-        run: echo "My first GitHub Actions Job"
-        
-      - name: List files
-        run: ls
-        
-      - name: Read file
-        run: cat README.md
+      - name: Check out repository
+        uses: actions/checkout@v3.6.0
