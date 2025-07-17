@@ -1,4 +1,4 @@
-name: My NodeJS App
+name: My Simple Workflow
 on: 
   push:
     branches:
@@ -6,27 +6,16 @@ on:
 
 
 jobs:
-  unit-testing:
-    name: Unit Testing
+  ascii_job:
     runs-on: ubuntu-latest
-
-
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+      - name: List Current Files
+        run: ls -ltra
 
 
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Unit Tests
-        run: |
-          npm test &
-          sleep 2
-          curl -sSf http://localhost:3000 | grep 'Hello from Node.js Application'
+      - name: Run ASCII Art Script
+        run: ./ascii-script.sh
