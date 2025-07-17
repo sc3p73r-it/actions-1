@@ -28,6 +28,5 @@ jobs:
     steps:
       - name: Docker Run
         run: |
-          docker pull sc3p73r/nodejs-test-app:latest
           docker run -d -p 8000:80 sc3p73r/nodejs-test-app:latest
           curl localhost:8000
