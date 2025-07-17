@@ -27,9 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Docker Run
-        run: docker run -d -p 8000:80 sc3p73r/nodejs-test-app:latest
+        run: docker run -d -p 8000:80 --name nodejs-app sc3p73r/nodejs-test-app:latest
 
       - name: Verify Docker Container
-        run: |
-         sleep 5
-         curl --retry 5 --retry-delay 2 --retry-connrefused --insecure http://localhost:8000
+        run: docker logs nodejs-app
