@@ -27,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Docker Run
-        run: |
-          docker run -d -p 8000:80 sc3p73r/nodejs-test-app:latest
-          curl localhost:8000
+        run: docker run -d -p 8000:80 sc3p73r/nodejs-test-app:latest
+
+      - name: Verify Docker Container
+        run: curl localhost:8000
