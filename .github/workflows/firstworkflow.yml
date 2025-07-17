@@ -11,6 +11,9 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Docker
+        run: curl https://get.docker.com | sh
+        
       - name: Docker Build
         run: docker build -t docker.io/sc3p73r/nodejs-test-app:latest .
       
