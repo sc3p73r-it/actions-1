@@ -22,9 +22,11 @@ jobs:
         run: docker push docker.io/sc3p73r/nodejs-test-app:latest
 
 
-  # deploy:
-  #   needs: docker
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Docker Run
-  #       run: docker run -d -p 8000:80 docker.io/dockerUsername/imageName:latest
+  deploy:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Run
+        run: |
+          docker run -d -p 8000:80 docker.io/sc3p73r/nodejs-test-app:latest
+          curl localhost:8000
