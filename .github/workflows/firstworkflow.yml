@@ -4,29 +4,27 @@ name: Exploring Variables and Secrets
 on:
   push:
 
+env: 
+  CONTAINER_REGISTRY: docker.io
+  DOCKER_USERNAME: sc3p73r
+  IMAGE_NAME: nodejs-test-app
+  DOCKER_PASSWORD: Dream@123
 
 jobs:
   docker:
-    env:
-      CONTAINER_REGISTRY: docker.io
-      DOCKER_USERNAME: sc3p73r
-      IMAGE_NAME: nodejs-test-app
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Docker Build
-        run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
+        run: docker build -t ${{ env.CONTAINER_REGISTRY }}/$DOCKER_USERNAME/$IMAGE_NAME:latest .
       
       - name: Docker Login
-        env:
-          DOCKER_PASSWORD: Dream@123
         run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
       
       - name: Docker Publish
-        run: docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: docker push ${{ env.CONTAINER_REGISTRY }}/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
 
   # deploy:
