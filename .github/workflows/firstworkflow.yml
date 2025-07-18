@@ -13,21 +13,32 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Docker Build
-        run: docker build -t docker.io/sc3p73r/nodejs-test-app:latest .
+        env:
+          CONTAINER_REGISTRY: docker.io
+          DOCKER_USERNAME: sc3p73r
+          IMAGE_NAME: nodejs-test-app
+        run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
       
       - name: Docker Login
-        run: docker login --username=sc3p73r@outlook.com --password=Dream@123
+        env:
+          DOCKER_USERNAME: sc3p73r@outlook.com 
+          DOCKER_PASSWORD: Dream@123
+        run: docker login --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
       
       - name: Docker Publish
-        run: docker push docker.io/sc3p73r/nodejs-test-app:latest
+        env:
+          CONTAINER_REGISTRY: docker.io
+          DOCKER_USERNAME: sc3p73r
+          IMAGE_NAME: nodejs-test-app
+        run: docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
 
-  deploy:
-    needs: docker
-    runs-on: ubuntu-latest
-    steps:
-      - name: Docker Run
-        run: docker run -d -p 8000:80 --name nodejs-app sc3p73r/nodejs-test-app:latest
+  # deploy:
+  #   needs: docker
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Docker Run
+  #       run: docker run -d -p 8000:80 --name nodejs-app sc3p73r/nodejs-test-app:latest
 
-      - name: Verify Docker Container
-        run: docker logs nodejs-app
+  #     - name: Verify Docker Container
+  #       run: docker logs nodejs-app
