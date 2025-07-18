@@ -5,10 +5,7 @@ on:
   push:
 
 env: 
-  CONTAINER_REGISTRY: docker.io
-  DOCKER_USERNAME: sc3p73r
   IMAGE_NAME: nodejs-test-app
-  DOCKER_PASSWORD: Dream@123
 
 jobs:
   docker:
